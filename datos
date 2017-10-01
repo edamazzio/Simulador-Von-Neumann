@@ -1,0 +1,60 @@
+Dudas progra:
+
+ciclo de fetch: 
+
+1. Buscar la instrucción en la memoria principal
+
+Se vuelca el valor del contador de programa sobre el bus de direcciones. Entonces la CPU pasa la instrucción de la memoria principal a través del bus de datos al Registro de Dirección de Memoria (MAR). A continuación el valor del MAR es colocado en el Registro de Instrucción Actual (CIR), un circuito que guarda la instrucción temporalmente de manera que pueda ser decodificada y ejecutada.
+
+2. Decodificar la instrucción
+
+El decodificador de instrucción interpreta e implementa la instrucción. El registro de instrucción (IR) mantiene la instrucción en curso mientras el contador de programa (PC, program counter) guarda la dirección de memoria de la siguiente instrucción a ser ejecutada.
+
+Recogida de datos desde la memoria principal
+Se accede al banco de registros por los operandos (solo si es necesario)
+Se calcula el valor del operando inmediato con extensión de signo (solo si es necesario)
+También se lee la dirección efectiva de la memoria principal si la instrucción tiene una dirección indirecta, y se recogen los datos requeridos de la memoria principal para ser procesados y colocados en los registros de datos.
+
+3. Ejecutar la instrucción
+
+A partir del registro de instrucción, los datos que forman la instrucción son decodificados por la unidad de control. Ésta interpreta la información como una secuencia de señales de control que son enviadas a las unidades funcionales relevantes de la CPU para realizar la operación requerida por la instrucción poder terminarla y seguir asi.
+
+4. Almacenar o guardar resultados
+
+El resultado generado por la operación es almacenado en la memoria principal o enviado a un dispositivo de salida dependiendo de la instrucción. Basándose en los resultados de la operación, el contador de programa se incrementa para apuntar a la siguiente instrucción o se actualiza con una dirección diferente donde la próxima instrucción será recogida.
+
+Que es bifurcar una instrucción?
+
+- Crear los structs de cada una de las partes del procesador.
+
+- memoria de 256 celdas
+
+- Cada registro es de 16 bits (2 bytes), AX,BX,CX,DX Y sus High and lows (ah,al de cuanto 8 bits, 1 byte) y el PC, el IR, el MAR y el MBR
+
+- Bus de datos de 2 bytes
+
+- ALU tiene: suma, resta, multiplicacion y division entera con modulo. AND, OR, XOR, NOT y shl, shr.
+
+- Banderas: carry, signo, cero e interrupt. (array de registros)
+
+- Ciclo de fetch alambrado en la UC
+
+FUNCIONALIDADES:
+
+- Acerca de y ayuda (argumentos de comando de linea) para salvar puntitos :3
+
+- Cargar y guardar una AFOC en disco
+
+- Resetear una AFOC, restaurar a los valores inciales a la arquitectura básica y limpiar toda memoria y registros
+
+- Nueva instrucción ASM 
+	- Nombre
+	- n-mónico
+	- microprograma por cada modo de direccionamiento
+	- Interfaz de usuario para escribir el microprograma
+
+- Cargar ASM desde posición de memoria (el array de 256 celdas)
+
+- Ejecutar la AFUCK
+
+- 
