@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 struct ALU {
 
 
@@ -12,22 +10,25 @@ struct ALU {
 
 };
 
-void sum(){}
+#include <stdio.h>
 
-void sub(){}
 
-void mul(){}
+void add(void);
 
-void div(){}
+void sub(void);
 
-void and(){}
+void mul(void);
 
-void or(){}
+void div(void);
 
-void xor(){}
+void and(void);
 
-void not(){}
+void or(void);
 
-void shl(){}
+void xor(void);
 
-void shr(){}
+void not(void);
+
+void shl(void);
+
+void shr(void);
