@@ -1,0 +1,33 @@
+Tareas
+
+
+
+1 - Instrucciones tienen código 
+
+Diccionario de instrucciones
+
+
+0 MOV 	R/M, R 		ó	 M, [4toDato]
+1 MOV 	Reg [4toDato]
+2 OUT 	Reg
+3 IN  	Reg
+4 JMP	[0-256]
+5 JZ	[0-256]
+6 CMP	R/M ,R/M
+7 CMP 	INM, Reg
+8 CLI	
+9 STI	
+
+
+
+2 - Microprogramas de 0 1 2 3 4 5 6 7 8 9
+
+3 - Partes 
+
+	
+	
+
+
+
+
+

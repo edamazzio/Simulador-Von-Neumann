@@ -32,21 +32,29 @@ int initializeMemory(){
 }
 
 
-void printHigh(short int numero){
-	printf("%02x\n", numero>>8);
+void printHigh(short  numero){
+	short shortie = numero>>8;
+	if(numero < 0){
+		shortie-=0xff00;
+	}
+	printf("%02hx\n", shortie);
 }
 
-void printLow(short int numero){
-	printf("%02x\n", memory[0]%0x100);
+void printLow(short  numero){
+	short shortie = numero % 0x100;
+	if(numero < 0){
+		shortie-=0xff00;
+	}
+	printf("%02hx\n", shortie);
 }
 
 void printNum(short int numero){
-	printf("%04x\n", memory[0]);
+	printf("%04hx\n", memory[0]);
 }
 
 int main() {
 	if(!initializeMemory()) return 1;
-	memory[0] = MAX_SIGNED_SHORT;
+	memory[0] = -3;
 	printNum(memory[0]);
 	printHigh(memory[0]);
 	printLow(memory[0]);
