@@ -1,7 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "registers.h"
+#include <microinstructions.c>
 
 int main (){
 	printf("hola\n");
 }
+
+
+
+
+
+
+
+
+
+

@@ -58,3 +58,21 @@ FUNCIONALIDADES:
 - Ejecutar la AFUCK
 
 - 
+
+
+
+
+
+
+
+Mem: R -> MAR = PC, MBR = MEM[MAR]
+Mem: W -> MAR = cuartoDato(?)
+
+
+
+
+
+
+
+
+

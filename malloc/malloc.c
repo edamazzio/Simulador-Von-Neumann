@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #define MEM_SIZE 256
 #define REGISTER_SIZE 2 //In Bytes
 #define MAX_SIGNED_SHORT 32767
@@ -52,7 +53,7 @@ void printNum(short int numero){
 	printf("%04hx\n", memory[0]);
 }
 
-int main() {
+/*int main() {
 	if(!initializeMemory()) return 1;
 	memory[0] = -3;
 	printNum(memory[0]);
@@ -60,4 +61,23 @@ int main() {
 	printLow(memory[0]);
 	
 	return 0;
+}*/
+
+int main ()
+{
+  char str[] ="This is:as string";
+  char * location;
+  location = strstr (str,":");
+  char *str2 = calloc(3, sizeof(char));
+
+  str2[0] = location[-2];
+  str2[1] = location[-1];
+  str[2] = '\0';
+
+  printf("%s", str2);
+  if (!strcmp(str2, "isa")){
+  	printf ("IT IS IS");
+  }
+
+  return 0;
 }
