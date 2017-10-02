@@ -1,2 +1,12 @@
 #define AX 0
-#define 
+#define BX 1
+#define CX 2
+#define DX 3
+#define AL 4
+#define BL 5
+#define CL 6
+#define DL 7
+#define AH 8
+#define BH 9
+#define CH 10
+#define DH 11
