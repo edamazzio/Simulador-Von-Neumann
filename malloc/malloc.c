@@ -5,7 +5,7 @@
 #include <string.h>
 #define MEM_SIZE 256
 #define REGISTER_SIZE 2 //In Bytes
-#define MAX_SIGNED_SHORT 32767
+
 
 
 short * memory;
@@ -63,7 +63,14 @@ void printNum(short int numero){
 	return 0;
 }*/
 
-int main ()
+struct instruction {
+	short codigo;
+	short arg1;
+	short arg2;
+	short cuartoDato;
+} instruction;
+
+/*int main ()
 {
   char str[] ="This is:as string";
   char * location;
@@ -79,5 +86,15 @@ int main ()
   	printf ("IT IS IS");
   }
 
+	printf("sizeof(instruction): %lu\n", sizeof(instruction));
+
   return 0;
-}
+}*/
+
+
+
+
+
+
+
+

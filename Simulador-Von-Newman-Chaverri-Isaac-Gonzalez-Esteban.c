@@ -1,9 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <microinstructions.c>
+#include <string.h>
+#include "microinstructions.c"
+#define MEM_SIZE 256
+
+struct Instruction {
+	short codigo;
+	short arg1;
+	short arg2;
+	short cuartoDato;
+} instruction;
+
+struct Instruction *memory;
+
+int initializeMemory(){
+	//Reserva memoria para la memoria (lol)
+	memory = calloc(MEM_SIZE, sizeof(instruction));
+
+	//Si calloc reornó un puntero y no NULL (cero), retorna 1.
+	if (memory){
+		return 1;
+	}
+	return 0;
+}
+
+
 
 int main (){
-	printf("hola\n");
+	//Inicializa la memoria y de paso revisa si el puntero es nulo.
+	if (!initializeMemory()) printf ("Calloc for memory failed\n");
+	memory[0].codigo = 60000;
+	memory[0].codigo += 5000;
+	memory[0].codigo += 500;
+	memory[0].codigo += 30;
+	memory[0].codigo += 5;
+	printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 }
 
 
