@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "microinstructions.c"
+#include "microinstructions.c"	
 #define MEM_SIZE 256
 
 struct Instruction {
@@ -29,11 +29,7 @@ int initializeMemory(){
 int main (){
 	//Inicializa la memoria y de paso revisa si el puntero es nulo.
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
-	memory[0].codigo = 60000;
-	memory[0].codigo += 5000;
-	memory[0].codigo += 500;
-	memory[0].codigo += 30;
-	memory[0].codigo += 5;
+	
 	printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 }
 
