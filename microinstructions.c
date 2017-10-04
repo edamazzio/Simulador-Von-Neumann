@@ -22,7 +22,9 @@ struct MicroInstruction scanMicroInstruction(char *line){
 	//Next step would be to separate the separator from the two operands,
 	//so, let's use the same pointer, point to the end of the string, to store only the left operand
 	if (!separator) while ((separator=&line[counter])!='\0')counter++;
-			
+	
+	counter = 0;		
+
 	while (iterator != separator){
 		//do
 	}
@@ -45,6 +47,7 @@ void parseMicroInstruction (char *instruction){
 	}else {
 		separator = strstr(instruction, ":");
 		if (separator){
+			 
 			//Check which instruction
 		}
 		else{

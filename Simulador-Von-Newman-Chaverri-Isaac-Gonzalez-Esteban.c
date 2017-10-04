@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "structs/ALU.c"
 #include "microinstructions.c"	
 #define MEM_SIZE 256
 

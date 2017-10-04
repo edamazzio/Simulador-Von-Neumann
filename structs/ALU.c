@@ -1,4 +1,4 @@
-#include "ALU.h"
+
 
 void add(registro1, registro2){
 		B3 = B1 + B2;
