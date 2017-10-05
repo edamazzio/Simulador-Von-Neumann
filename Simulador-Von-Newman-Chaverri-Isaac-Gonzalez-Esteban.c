@@ -32,6 +32,10 @@ int main (){
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 	
 	printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
+
+	struct MicroInstruction a = scanMicroInstruction("AXB:DGR");
+
+	printf ("LEFTOP = %s\n RIGHTOP = %s\n OP = %s\n", a.leftOP, a.rightOP, a.operator);
 }
 
 

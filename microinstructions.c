@@ -13,22 +13,58 @@ struct MicroInstruction scanMicroInstruction(char *line){
 	char *separator;
 
 	//Look for <
-	separator = strstr(line, "<");
+	separator = strstr(line, "<");	
+	if (separator){
+		microInstruction.operator[0] = separator[0];
+		microInstruction.operator[1] = separator[1];
+		microInstruction.operator[2] = '\0';
+	} else {
 
-	//If not <, find :
-	if (!separator)	separator = strstr(line, ":");
+		//If not <, find :
+		separator = strstr(line, ":");
+		if (separator){
+			microInstruction.operator[0] = separator[0];
+			microInstruction.operator[2] = '\0';
+		} else {
 
-	//If also not :, might be In or out
-	//Next step would be to separate the separator from the two operands,
-	//so, let's use the same pointer, point to the end of the string, to store only the left operand
-	if (!separator) while ((separator=&line[counter])!='\0')counter++;
-	
-	counter = 0;		
+			//If also not :, might be In or out
+			//Next step would be to separate the separator from the two operands,
+			//so, let's use the same pointer, point to the end of the string, to store only the left operand
+			separator = line;
+			while (*separator) separator++;
 
-	while (iterator != separator){
-		//do
+			printf("Separator is %c\n", *separator);
+		}
 	}
 
+	//obtains the left operator
+	while (iterator != separator) {
+		if (*iterator == ' ') {
+			iterator++; 
+			continue;
+		}
+		microInstruction.leftOP[counter++] = *iterator++;
+	}
+
+	//Adds a \0 to end the char string
+	microInstruction.leftOP[counter] = '\0';
+
+	counter = 0;
+
+	//If the operator is <-, the iterator must be incremented to point to the next letter
+	if (microInstruction.operator[0]== '<') iterator++;
+	iterator++;
+
+	if (microInstruction.operator[0] == '\0') return microInstruction;
+	
+	//obtains the right operator
+	while (*iterator != '\0') {
+		if (*iterator == ' ') {
+			iterator++; 
+			continue;
+		}
+		microInstruction.rightOP[counter++] = *iterator++;
+	}
 	return microInstruction;
 }
 
