@@ -31,11 +31,13 @@ int main (){
 	//Inicializa la memoria y de paso revisa si el puntero es nulo.
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 	
-	printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
+	//printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 
-	struct MicroInstruction a = scanMicroInstruction("AXB:DGR");
+	struct MicroInstruction a = scanMicroInstruction("MEMs:DGR");
 
-	printf ("LEFTOP = %s\n RIGHTOP = %s\n OP = %s\n", a.leftOP, a.rightOP, a.operator);
+	//printf ("LEFTOP = %s\n RIGHTOP = %s\n OP = %s\n", a.leftOP, a.rightOP, a.operator);
+
+	parseMicroInstruction(a);
 }
 
 
