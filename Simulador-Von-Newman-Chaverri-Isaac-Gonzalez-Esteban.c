@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 //#include "structs/ALU.c"
+
 #include "structs/CPU.c"
-#include "microinstructions.c"	
+#include "microinstructions.c"
+
 #define MEM_SIZE 256
 
 struct Instruction {
@@ -31,22 +33,18 @@ int initializeMemory(){
 int main (){
 	//Inicializa la memoria y de paso revisa si el puntero es nulo.
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
-	
+
 	//printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 
-	struct MicroInstruction a = scanMicroInstruction("MEMs:DGR");
+	struct MicroInstruction a = scanMicroInstruction("ALU:add");
+
+	struct ALU alu = {65535,-1,0,0};
+	printf("%d \n",alu.B1);
+	microadd(&alu);
+
+	printf("%d \n",alu.B3);
 
 	//printf ("LEFTOP = %s\n RIGHTOP = %s\n OP = %s\n", a.leftOP, a.rightOP, a.operator);
 
 	parseMicroInstruction(a);
 }
-
-
-
-
-
-
-
-
-
-
