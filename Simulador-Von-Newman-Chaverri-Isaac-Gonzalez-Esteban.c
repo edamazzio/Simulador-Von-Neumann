@@ -3,7 +3,7 @@
 #include <string.h>
 //#include "structs/ALU.c"
 
-#include "structs/CPU.c"
+#include "ALU.c"
 #include "microinstructions.c"
 
 #define MEM_SIZE 256
@@ -36,15 +36,17 @@ int main (){
 
 	//printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 
-	struct MicroInstruction a = scanMicroInstruction("ALU:add");
 
-	struct ALU alu = {65535,-1,0,0};
-	printf("%d \n",alu.B1);
-	microadd(&alu);
+	struct MicroInstruction a = scanMicroInstruction("[BL]<-5");
+	parseMicroInstruction(a);
 
-	printf("%d \n",alu.B3);
+	//a = scanMicroInstruction("AX<-BX");
+	//parseMicroInstruction(a);
+
+	//struct ALU alu = {65535,-1,0,0};
+	// printf("%lu \n",);
 
 	//printf ("LEFTOP = %s\n RIGHTOP = %s\n OP = %s\n", a.leftOP, a.rightOP, a.operator);
 
-	parseMicroInstruction(a);
+
 }

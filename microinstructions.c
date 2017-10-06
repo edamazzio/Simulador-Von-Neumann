@@ -1,10 +1,11 @@
 #include "microinstructions.h"
+#include <ctype.h>
 
-struct MicroInstruction{
-	char leftOP[16];
-	char operator[3];
-	char rightOP[16];
-};
+
+char *registerNames[] = {"AX","BX","CX","DX","AL","BL","CL","DL","AH","BH","CH","DH","[dir]","[BL]","[BH]","B1", "B2", "B3", "B4", "BD","PC", "IR"};
+short registers[sizeof(registerNames)/sizeof(registerNames[0])];
+
+
 
 struct MicroInstruction scanMicroInstruction(char *line){
 	struct MicroInstruction microInstruction = {"","",""};
@@ -13,7 +14,7 @@ struct MicroInstruction scanMicroInstruction(char *line){
 	char *separator;
 
 	//Look for <
-	separator = strstr(line, "<");	
+	separator = strstr(line, "<");
 	if (separator){
 		microInstruction.operator[0] = separator[0];
 		microInstruction.operator[1] = separator[1];
@@ -40,7 +41,7 @@ struct MicroInstruction scanMicroInstruction(char *line){
 	//obtains the left operator
 	while (iterator != separator) {
 		if (*iterator == ' ') {
-			iterator++; 
+			iterator++;
 			continue;
 		}
 		microInstruction.leftOP[counter++] = *iterator++;
@@ -56,11 +57,11 @@ struct MicroInstruction scanMicroInstruction(char *line){
 	iterator++;
 
 	if (microInstruction.operator[0] == '\0') return microInstruction;
-	
+
 	//obtains the right operator
 	while (*iterator != '\0') {
 		if (*iterator == ' ') {
-			iterator++; 
+			iterator++;
 			continue;
 		}
 		microInstruction.rightOP[counter++] = *iterator++;
@@ -71,7 +72,7 @@ struct MicroInstruction scanMicroInstruction(char *line){
 
 
 void parseMicroInstruction (struct MicroInstruction microInstruction){
-	
+
 	char *separator;
 	char *registerX = calloc(3, sizeof(char));
 	char *registerY = calloc(3, sizeof(char));
@@ -91,7 +92,7 @@ void parseMicroInstruction (struct MicroInstruction microInstruction){
 			 } else if (!strcmp(microInstruction.leftOP, "TEST")){
 			 	printf("TEST found\n");
 			 } else printf("Microinstruction %s not recognized in %s%s%s\n", microInstruction.leftOP, microInstruction.leftOP, microInstruction.operator, microInstruction.rightOP);
-			
+
 		}
 		else{
 			// !!!strcmp returns 0 if strings are equal!!!
@@ -101,23 +102,84 @@ void parseMicroInstruction (struct MicroInstruction microInstruction){
 				printf("OUT found\n");
 			}
 			//microInstruction not recognized, print error to stdout.
-			else printf("Microinstruction %s not recognized", microInstruction.leftOP);	
+			else printf("Microinstruction %s not recognized\n", microInstruction.leftOP);
 
 		}
 	}
-} 
+}
 
 
 void parseMicroMov(struct MicroInstruction microInstruction){
-	i = 0;
-	for (i = 0; i < )
+
+	//Check if operands are memory addresses
+	if (microInstruction.leftOP[0]=='[' ){
+		printf("MicroInstruction invalid, can't <- between memory addresses: \"%s\"\n", microInstruction.leftOP);
+		return;
+	}
+	if (microInstruction.rightOP[0]=='[' ){
+		printf("MicroInstruction invalid, can't <- between memory addresses: \"%s\"\n", microInstruction.rightOP);
+		return;
+	}
+
+	int i = 0;
+	int size = sizeof(registerNames)/sizeof(registerNames[0]);
+	int leftRegisterIndex = -1;
+	int rightRegisterIndex = -1;
+
+	//Check if leftOP is a register
+	for (i = 0; i < size;i++){
+		if (!strcmp(microInstruction.leftOP, registerNames[i])){
+			leftRegisterIndex = i;
+			printf ("leftOP found at registerNames[%d]=%s\n",i,registerNames[i]);
+			break;
+		}
+	}
+
+	//If a register was found on the left side
+	if (leftRegisterIndex!= -1){
+
+		//Check if rightOP is digit. If so, take the whole rightOP as a number
+		if (isdigit(microInstruction.rightOP[0])){
+
+			printf("It was a digit\n");
+
+			//DO MOV. strtol converts a string to integer
+			registers[leftRegisterIndex] = strtol(microInstruction.rightOP,0,10);
+			return;
+		}
+
+		//Check if rightOP is a register
+		for (i = 0; i < size;i++){
+			if (!strcmp(microInstruction.rightOP, registerNames[i])){
+				rightRegisterIndex = i;
+				printf ("rightOP found at registerNames[%d]=%s\n",i,registerNames[i]);
+				break;
+			}
+		}
+		//If a register was found on the right side
+		if (rightRegisterIndex!= -1){
+
+			//DO MOV
+			registers[leftRegisterIndex] = registers[rightRegisterIndex];
+			for (i=0;i<size;i++){
+				printf("registers[%d]=%d\n", i, registers[i]);
+			}
+
+		}else{
+			printf("MicroInstruction <- not valid. Invalid right operand: \"%s\"\n", microInstruction.rightOP);
+		}
+
+
+	}else{
+		printf("MicroInstruction <- not valid. Invalid left operand: \"%s\"\n", microInstruction.leftOP);
+	}
 }
 
 /*void doMicroMov(char *X, char*Y){
 	short reg1 = -1;
 	short reg2 = -1;
 	if (strcmp(X, "AX")){
-		
+
 	}
 }
 

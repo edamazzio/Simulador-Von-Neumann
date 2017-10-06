@@ -1,6 +1,8 @@
 //	#include "ALU.c"
 
 
+
+
 struct flags {
 	//La Carry Flag, la Sign Flag, la Zero Flag y la Interrupt Flag
 	short CF;
@@ -19,7 +21,7 @@ struct ALU {
 
 
 struct RT {
-   
+
 	short registros[4];
 
 };
@@ -34,4 +36,3 @@ struct CPU {
 	short * IR;
 	short * PC;
 };
-
