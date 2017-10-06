@@ -37,13 +37,13 @@ int main (){
 	//printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 
 
-	struct MicroInstruction a = scanMicroInstruction("B1<-4");
+	struct MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
 
-	struct MicroInstruction b = scanMicroInstruction("B2<-6");
+	struct MicroInstruction b = scanMicroInstruction("B2<-5");
 	parseMicroInstruction(b);
 
-	struct MicroInstruction c = scanMicroInstruction("ALU:add");
+	struct MicroInstruction c = scanMicroInstruction("ALU:div");
 	parseMicroALU(c);
 
 

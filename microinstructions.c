@@ -202,64 +202,64 @@ void parseMicroALU(struct MicroInstruction microInstruction){
 
 	printf("%s \n",microInstruction.leftOP);
 
-	if (microInstruction.leftOP == "ALU"){
+	if (!strcmp(microInstruction.leftOP, "ALU")) {
 
-		if (microInstruction.rightOP == "add"){
+		if (!strcmp(microInstruction.rightOP, "add")){
 
 			MicroAdd(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "sub"){
+		if (!strcmp(microInstruction.rightOP, "sub")){
 
 			MicroSub(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "mul"){
+		if (!strcmp(microInstruction.rightOP, "mul")){
 
 			MicroMul(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "div"){
+		if (!strcmp(microInstruction.rightOP, "div")){
 
 			MicroDiv(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "and"){
+		if (!strcmp(microInstruction.rightOP, "and")){
 
 			MicroAnd(&alu);
 
 		}
 		
 
-		if (microInstruction.rightOP == "or"){
+		if (!strcmp(microInstruction.rightOP, "or")){
 
 			MicroOr(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "xor"){
+		if (!strcmp(microInstruction.rightOP, "xor")){
 
 			MicroXor(&alu);
 
 		}
 
-		if (microInstruction.rightOP ==  "not"){
+		if (!strcmp(microInstruction.rightOP,  "not")){
 
 			MicroNot(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "shr"){
+		if (!strcmp(microInstruction.rightOP, "shr")){
 
 			MicroShr(&alu);
 
 		}
 
-		if (microInstruction.rightOP == "shl"){
+		if (!strcmp(microInstruction.rightOP, "shl")){
 
 			MicroShl(&alu);
 
@@ -271,10 +271,10 @@ void parseMicroALU(struct MicroInstruction microInstruction){
 		registers[B2] = alu.B2;
 		registers[B3] = alu.B3;
 		registers[B4] = alu.B4;
-		printf("%d \n",B1);
-		printf("%d \n",B2);
-		printf("%d \n",B3);
-		printf("%d \n",B4);
+		printf("%d \n",registers[B1]);
+		printf("%d \n",registers[B2]);
+		printf("%d \n",registers[B3]);
+		printf("%d \n",registers[B4]);
 
 	}
 
