@@ -175,6 +175,120 @@ void parseMicroMov(struct MicroInstruction microInstruction){
 	}
 }
 
+void parseMicroALU(struct MicroInstruction microInstruction){
+
+	
+
+	int i = 0;
+	int size = sizeof(registerNames)/sizeof(registerNames[0]);
+	int B1 = -1;
+	int B2 = -1;
+	int B3 = -1;
+	int B4 = -1;
+
+	//Check if leftOP is a register
+	for (i = 0; i < size;i++){
+		if (!strcmp("B1", registerNames[i])){
+			B1 = i;
+			B2 = i+1;
+			B3 = i+2;
+			B4 = i+3;
+			printf ("B registers found at registerNames[%d]=%s\n",i,registerNames[i]);
+			break;
+		}
+	}
+
+	struct ALU alu = {registers[B1],registers[B2],registers[B3],registers[B4]};
+
+	printf("%s \n",microInstruction.leftOP);
+
+	if (microInstruction.leftOP == "ALU"){
+
+		if (microInstruction.rightOP == "add"){
+
+			MicroAdd(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "sub"){
+
+			MicroSub(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "mul"){
+
+			MicroMul(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "div"){
+
+			MicroDiv(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "and"){
+
+			MicroAnd(&alu);
+
+		}
+		
+
+		if (microInstruction.rightOP == "or"){
+
+			MicroOr(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "xor"){
+
+			MicroXor(&alu);
+
+		}
+
+		if (microInstruction.rightOP ==  "not"){
+
+			MicroNot(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "shr"){
+
+			MicroShr(&alu);
+
+		}
+
+		if (microInstruction.rightOP == "shl"){
+
+			MicroShl(&alu);
+
+		}
+
+
+
+		registers[B1] = alu.B1;
+		registers[B2] = alu.B2;
+		registers[B3] = alu.B3;
+		registers[B4] = alu.B4;
+		printf("%d \n",B1);
+		printf("%d \n",B2);
+		printf("%d \n",B3);
+		printf("%d \n",B4);
+
+	}
+
+
+	else{
+
+		printf("MicroInstruction not recognized \"%s\"\n", microInstruction.leftOP);
+		return;
+
+		}
+
+	
+}
+
 /*void doMicroMov(char *X, char*Y){
 	short reg1 = -1;
 	short reg2 = -1;

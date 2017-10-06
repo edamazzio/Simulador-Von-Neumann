@@ -1,43 +1,43 @@
 #include "CPU.h"
 
-void microadd(struct ALU *alu){
+void MicroAdd(struct ALU *alu){
 		alu->B3 = alu->B1 + alu->B2;
 }
 
-void microsub(struct ALU *alu){
+void MicroSub(struct ALU *alu){
 	alu->B3 = alu->B1 - alu->B2;
 } 
 
-void micromul(struct ALU *alu){
+void MicroMul(struct ALU *alu){
 	alu->B3 = alu->B1 * alu->B2;
 }
 
-void microdiv(struct ALU *alu){
+void MicroDiv(struct ALU *alu){
 
 	alu->B3 = alu->B1 / alu->B2;
 	alu->B4 = alu->B1 % alu->B2;
 }
 
-void microand(struct ALU *alu){
+void MicroAnd(struct ALU *alu){
 	alu->B3 =  alu->B1 & alu->B2;
 }
 
-void microor(struct ALU *alu){
+void MicroOr(struct ALU *alu){
 	alu->B3 =  alu->B1 | alu->B2;
 }
 
-void microxor(struct ALU *alu){
+void MicroXor(struct ALU *alu){
 	alu->B3 =  alu->B1 ^ alu->B2;
 }
 
-void micronot(struct ALU *alu){
+void MicroNot(struct ALU *alu){
 	alu->B3 =  ~ alu->B1;
 }
 
-void microshl(struct ALU *alu){
+void MicroShl(struct ALU *alu){
 	alu->B3 =  alu->B1>>1;
 }
 
-void microshr(struct ALU *alu){
+void MicroShr(struct ALU *alu){
 	alu->B3 =  alu->B1<<1;
 }
