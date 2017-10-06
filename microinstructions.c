@@ -70,41 +70,48 @@ struct MicroInstruction scanMicroInstruction(char *line){
 
 
 
-void parseMicroInstruction (struct MicroInstruction microinstruction){
+void parseMicroInstruction (struct MicroInstruction microInstruction){
 	
 	char *separator;
 	char *registerX = calloc(3, sizeof(char));
 	char *registerY = calloc(3, sizeof(char));
 
-	separator = strstr(microinstruction.operator, "<");
+	separator = strstr(microInstruction.operator, "<");
 	if (separator) {
+		parseMicroMov(microInstruction);
 		//assignMovRegisters(registerX, registerY, separator);
 		//doMicroMov(registerX, registerY);
 	}else {
-		separator = strstr(microinstruction.operator, ":");
+		separator = strstr(microInstruction.operator, ":");
 		if (separator){
-			 if(!strcmp(microinstruction.leftOP, "ALU")){
+			 if(!strcmp(microInstruction.leftOP, "ALU")){
 			 	printf("ALU found\n");
-			 } else if (!strcmp(microinstruction.leftOP, "MEM")){
+			 } else if (!strcmp(microInstruction.leftOP, "MEM")){
 			 	printf("MEM found\n");
-			 } else if (!strcmp(microinstruction.leftOP, "TEST")){
+			 } else if (!strcmp(microInstruction.leftOP, "TEST")){
 			 	printf("TEST found\n");
-			 } else printf("Microinstruction %s not recognized in %s%s%s\n", microinstruction.leftOP, microinstruction.leftOP, microinstruction.operator, microinstruction.rightOP);
+			 } else printf("Microinstruction %s not recognized in %s%s%s\n", microInstruction.leftOP, microInstruction.leftOP, microInstruction.operator, microInstruction.rightOP);
 			
 		}
 		else{
 			// !!!strcmp returns 0 if strings are equal!!!
-			if (!strcmp(microinstruction.leftOP, "IN")){
+			if (!strcmp(microInstruction.leftOP, "IN")){
 				printf("IN found\n");
-			}else if (!strcmp(microinstruction.leftOP, "OUT")){
+			}else if (!strcmp(microInstruction.leftOP, "OUT")){
 				printf("OUT found\n");
 			}
-			//microinstruction not recognized, print error to stdout.
-			else printf("Microinstruction %s not recognized", microinstruction.leftOP);	
+			//microInstruction not recognized, print error to stdout.
+			else printf("Microinstruction %s not recognized", microInstruction.leftOP);	
 
 		}
 	}
 } 
+
+
+void parseMicroMov(struct MicroInstruction microInstruction){
+	i = 0;
+	for (i = 0; i < )
+}
 
 /*void doMicroMov(char *X, char*Y){
 	short reg1 = -1;
