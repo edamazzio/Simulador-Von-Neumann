@@ -5,6 +5,7 @@
 
 #include "ALU.c"
 #include "microinstructions.c"
+#include "archivos.c"
 
 #define MEM_SIZE 256
 
@@ -36,6 +37,7 @@ int main (){
 
 	//printf ("El codigo de la instruccion en la posicion 0 de la memoria es %d\n", memory[0].codigo);
 
+	LeerArchivo();
 
 	struct MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
