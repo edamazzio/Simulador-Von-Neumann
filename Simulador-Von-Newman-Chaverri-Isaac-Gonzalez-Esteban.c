@@ -4,7 +4,7 @@
 
 
 /*Comando para compilar:
-cc -x c -c ALU.c && cc -x c -c microinstructions.c && cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c && cc -o simuladorVonNeumann Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o microinstructions.o ALU.o
+ cc -x c -c ALU.c &&  cc -x c -c CPU.c &&  cc -x c -c microinstructions.c &&  cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c &&  cc -o VonNeumann ALU.o CPU.o microinstructions.o Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o &&  ./VonNeumann
 */
 
 
