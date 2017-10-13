@@ -37,10 +37,11 @@ int loadAFOC() {
     }
 
     while ( fgets( row, sizeof( row ), fp ) != NULL ) {
-    
+
+    struct AFOCInstruction instruction;
+
     if (row[0] == '#'){
     	cantInstruccionesASM++;
-    	struct AFOCInstruction instruction;
     	instruction.microInstructions = calloc(contador, sizeof(struct MicroInstruction));
     	fgets( row, sizeof( row ), fp );
     	if (!row){
@@ -50,7 +51,7 @@ int loadAFOC() {
     	strcpy(instruction.mnemonic,row);
     	fgets( row, sizeof( row ), fp );
     	int ok = 1;
-    	while(row[0] != '$'){   		
+    	while(row[0] != '$'){
     		struct MicroInstruction micro;
     		micro = string2StructMicroInstruction(row);
     		if (!micro) {
@@ -60,7 +61,7 @@ int loadAFOC() {
     		instruction.microInstructions[contador] = micro;
     		contador++;
     		instruction.microInstructions = realloc(contador, sizeof(struct MicroInstruction));
-    		
+
 
     	ok = 1;
     	}
@@ -76,13 +77,13 @@ int loadAFOC() {
     }
     AFOC = realloc(1,sizeof(struct AFOCInstruction));
     AFOC[0] = instruction;
-   
+
     /*
     puts( row );
     */
     }
 
-    fclose( fp ); 
+    fclose( fp );
 
 
 		/*Si buff tiene #, -

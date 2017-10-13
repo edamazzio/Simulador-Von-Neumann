@@ -1,3 +1,7 @@
+
+#ifndef MICROH
+#define MICROH
+
 #include "ALU.h"
 #include <ctype.h>
 #include <stdlib.h>
@@ -20,3 +24,5 @@ void parseMicroMov(struct MicroInstruction microInstruction);
 void parseMicroALU(struct MicroInstruction microInstruction);
 void parseMicroMEM(struct MicroInstruction microInstruction);
 struct MicroInstruction scanMicroInstruction(char *line);
+
+#endif

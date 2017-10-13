@@ -1,5 +1,12 @@
+#ifndef CPUH
+#define CPUH
+
+
 #include "Instruction.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "microinstructions.h"
 #define MEM_SIZE 256
 
 extern char *registerNames[];
@@ -27,3 +34,4 @@ struct AFOCInstruction {
 	struct MicroInstruction * microInstructions;
 };
 
+#endif

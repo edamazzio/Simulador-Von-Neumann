@@ -1,3 +1,6 @@
+#ifndef ALUH
+#define ALUH
+
 #include <stdlib.h>
 #include "CPU.h"
 
@@ -18,3 +21,5 @@ void MicroXor(struct ALU *alu);
 void MicroNot(struct ALU *alu);
 void MicroShl(struct ALU *alu);
 void MicroShr(struct ALU *alu);
+
+#endif
