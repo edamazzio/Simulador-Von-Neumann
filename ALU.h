@@ -8,12 +8,6 @@ struct ALU {
 	int B4;
 };
 
-struct AFOCInstruction {
-	char mnemonic[6];
-	struct MicroInstruction * microInstructions;
-};
-
-
 void MicroAdd(struct ALU *alu);
 void MicroSub(struct ALU *alu);
 void MicroMul(struct ALU *alu);

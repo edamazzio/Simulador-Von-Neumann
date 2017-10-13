@@ -6,9 +6,12 @@ extern char *registerNames[];
 extern int registers[];
 extern int registerNamesLength;
 extern struct Instruction *memory;
+extern struct AFOCInstruction *AFOC;
 struct Instruction MBR;
 
 int initializeMemory();
+
+int loadAFOC();
 
 struct flags {
 	/*La Carry Flag, la Sign Flag, la Zero Flag y la Interrupt Flag*/
@@ -18,3 +21,9 @@ struct flags {
 	short IF;
 
 };
+
+struct AFOCInstruction {
+	char mnemonic[6];
+	struct MicroInstruction * microInstructions;
+};
+

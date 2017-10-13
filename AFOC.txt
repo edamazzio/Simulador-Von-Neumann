@@ -1,2 +1,6 @@
-Linea numero 1
-Linea numero 2
+#
+MOV
+X<-Y
+ALU:ADD
+Y<-X
+$
