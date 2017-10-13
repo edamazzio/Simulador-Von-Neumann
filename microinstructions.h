@@ -8,6 +8,10 @@ struct MicroInstruction{
 };
 
 void parseMicroMov(struct MicroInstruction microInstruction);
+void parseMicroInstruction (struct MicroInstruction microInstruction);
+void parseMicroMov(struct MicroInstruction microInstruction);
+void parseMicroALU(struct MicroInstruction microInstruction);
+void parseMicroMEM(struct MicroInstruction microInstruction);
 
 
 /*void assignMovRegisters(char * X, char * Y, char * separator);

@@ -1,12 +1,14 @@
 #include "CPU.h"
 
+struct Instruction *memory;
+
 void MicroAdd(struct ALU *alu){
 		alu->B3 = alu->B1 + alu->B2;
 }
 
 void MicroSub(struct ALU *alu){
 	alu->B3 = alu->B1 - alu->B2;
-} 
+}
 
 void MicroMul(struct ALU *alu){
 	alu->B3 = alu->B1 * alu->B2;
