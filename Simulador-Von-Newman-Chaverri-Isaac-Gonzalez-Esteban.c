@@ -11,7 +11,7 @@
 int main (){
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 
-	/*LeerArchivo();*/
+	loadAFOC();
 
 /*
 	struct MicroInstruction a = scanMicroInstruction("B1<-11");

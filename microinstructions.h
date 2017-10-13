@@ -23,6 +23,6 @@ void parseMicroInstruction (struct MicroInstruction microInstruction);
 void parseMicroMov(struct MicroInstruction microInstruction);
 void parseMicroALU(struct MicroInstruction microInstruction);
 void parseMicroMEM(struct MicroInstruction microInstruction);
-struct MicroInstruction scanMicroInstruction(char *line);
+struct MicroInstruction string2StructMicroInstruction(char *line);
 
 #endif

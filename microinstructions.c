@@ -2,7 +2,7 @@
 
 
 
-struct MicroInstruction scanMicroInstruction(char *line){
+struct MicroInstruction string2StructMicroInstruction(char *line){
 	struct MicroInstruction microInstruction = {"","",""};
 	short counter = 0;
 	char *iterator = line;
