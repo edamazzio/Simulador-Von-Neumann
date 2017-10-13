@@ -13,6 +13,7 @@ int main (){
 
 	/*LeerArchivo();*/
 
+/*
 	struct MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
 
@@ -20,7 +21,7 @@ int main (){
 	parseMicroInstruction(b);
 
 	struct MicroInstruction c = scanMicroInstruction("ALU:add");
-	parseMicroALU(c);
+	parseMicroALU(c);*/
 
 
 

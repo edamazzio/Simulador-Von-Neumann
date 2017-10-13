@@ -1,4 +1,4 @@
-/* 
+/*
 gcc -o archivos archivos.c
 ./archivos
 
@@ -22,7 +22,7 @@ int LeerArchivo() {
     fclose(fp);
 
     fp = fopen("AFOC.txt", "r");
-   
+
     int c;
 
     while (fscanf(fp, "%s", buff) == 1)
@@ -34,9 +34,22 @@ int LeerArchivo() {
    	fgets(buff, 255, (FILE*)fp);
     printf("%s", buff );
 
+		/*Si buff tiene #,
+			creo el struct de AFOCInstruction
+			hago calloc del struct de microinstructions con 1
+			contador = 1
+			WIHLEY (buff != "$")
+				llamo a string2StructMicroInstruction con buff
+				si me retornó algo
+				 	guardo la microInstruction
+					contador++
+					realloc del puntero de microInstructions del struct AFOCInstruction. con contador
+				else, detengo la vara
+			go to WHILEY
+*/
     }
 
-   
+
    fclose(fp);
 
    return 0;
