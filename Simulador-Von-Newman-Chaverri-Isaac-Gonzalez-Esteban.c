@@ -4,6 +4,7 @@
 #include "Instruction.h"
 #include "ALU.c"
 #include "microinstructions.c"
+#include "archivos.c"
 
 #define MEM_SIZE 256
 
@@ -25,6 +26,7 @@ int initializeMemory(){
 int main (){
 	/*.*/	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 
+	LeerArchivo();
 
 	struct MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
