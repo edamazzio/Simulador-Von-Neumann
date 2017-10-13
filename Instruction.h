@@ -4,4 +4,4 @@ struct Instruction {
 	int arg2;
 	int cuartoDato;
 	short isInstruction;
-} instruction;
+};

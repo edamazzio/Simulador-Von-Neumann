@@ -1,32 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "Instruction.h"
-#include "ALU.c"
-#include "microinstructions.c"
-#include "archivos.c"
-
-#define MEM_SIZE 256
+#include "microinstructions.h"
 
 
-
-int initializeMemory(){
-	/*Reserva memoria para la memoria (lol)*/
-	memory = calloc(MEM_SIZE, sizeof(instruction));
-
-	/*Si calloc reornó un puntero y no NULL (cero), retorna 1.*/
-	if (memory){
-		return 1;
-	}
-	return 0;
-}
-
+/*Comando para compilar:
+cc -x c -c ALU.c && cc -x c -c microinstructions.c && cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c && cc -o simuladorVonNeumann Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o microinstructions.o ALU.o
+*/
 
 
 int main (){
-	/*.*/	if (!initializeMemory()) printf ("Calloc for memory failed\n");
+	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 
-	LeerArchivo();
+	/*LeerArchivo();*/
 
 	struct MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
@@ -34,7 +19,7 @@ int main (){
 	struct MicroInstruction b = scanMicroInstruction("B2<-5");
 	parseMicroInstruction(b);
 
-	struct MicroInstruction c = scanMicroInstruction("ALU:div");
+	struct MicroInstruction c = scanMicroInstruction("ALU:add");
 	parseMicroALU(c);
 
 

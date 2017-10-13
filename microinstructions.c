@@ -1,11 +1,5 @@
 #include "microinstructions.h"
-#include <ctype.h>
 
-
-char *registerNames[] = {"AX","BX","CX","DX","AL","BL","CL","DL","AH","BH","CH","DH","[dir]","[BL]","[BH]","B1", "B2", "B3", "B4", "BD","PC", "IR", "MAR", "MBR"};
-int registers[sizeof(registerNames)/sizeof(registerNames[0])];
-
-struct Instruction MBR = {0,0,0,0,0};
 
 
 struct MicroInstruction scanMicroInstruction(char *line){
@@ -122,7 +116,7 @@ void parseMicroMov(struct MicroInstruction microInstruction){
 	}
 
 	int i = 0;
-	int size = sizeof(registerNames)/sizeof(registerNames[0]);
+	int size = registerNamesLength;
 	int leftRegisterIndex = -1;
 	int rightRegisterIndex = -1;
 
@@ -178,7 +172,7 @@ void parseMicroMov(struct MicroInstruction microInstruction){
 void parseMicroALU(struct MicroInstruction microInstruction){
 
 	int i = 0;
-	int size = sizeof(registerNames)/sizeof(registerNames[0]);
+	int size = registerNamesLength;
 	int B1, B2, B3, B4 = -1;
 
 	//Check if leftOP is a register
@@ -261,7 +255,7 @@ void parseMicroALU(struct MicroInstruction microInstruction){
 void parseMicroMEM(struct MicroInstruction microInstruction){
 
 	int i = 0;
-	int size = sizeof(registerNames)/sizeof(registerNames[0]);
+	int size = registerNamesLength;
 	int MAR;
 
 	for (i = 0; i < size;i++){

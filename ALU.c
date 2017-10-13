@@ -1,6 +1,5 @@
-#include "CPU.h"
+#include "ALU.h"
 
-struct Instruction *memory;
 
 void MicroAdd(struct ALU *alu){
 		alu->B3 = alu->B1 + alu->B2;
