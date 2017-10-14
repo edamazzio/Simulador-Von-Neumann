@@ -1,33 +1,47 @@
-Tareas
+/*
 
 
+//CODIFICAR (char *linea asm)
+izqCOMA:
+buscar izqCOMA en registerNames
+  si no lo encuentra, mama
+  si lo encuentra:
+    memory[0].arg1 = posicion en registers
 
-1 - Instrucciones tienen código 
+derCOMA:
+buscar derCOMA en registerNames   (en registerNames también está [bl], [bx] y [bh]])
+  si no lo encuentra,
+    MAMO
+  si lo encuentra:
+    memory[0].arg1 = posicion en registers
+    done
 
-Diccionario de instrucciones
+  si es un inmediato, lo pone en el cuarto dato
 
+  si es un [:
+    separar lo que está entre []
+    ver si es un int
+    si es un int
+      pone opcode 12 y pone en el 4to dato en la dirección entre []
+      done
+    si no es un int
+        MAMO
 
-0 MOV 	R/M, R 		ó	 M, [4toDato]
-1 MOV 	Reg [4toDato]
-2 OUT 	Reg
-3 IN  	Reg
-4 JMP	[0-256]
-5 JZ	[0-256]
-6 CMP	R/M ,R/M
-7 CMP 	INM, Reg
-8 CLI	
-9 STI	
-
-
-
-2 - Microprogramas de 0 1 2 3 4 5 6 7 8 9
-
-3 - Partes 
-
-	
-	
+  */
 
 
+  Para separar el mnemonico la parte izquierda y la derecha
+  char *line (parametro de la función)
+  char *comma = strstr(line, ",");   Ojo que es strng "" y no ''
+  char *space = strstr (line, " "); Cada programador se debe encargar que venga exactamente MOV AX,BX. Solo un espacio, solo una coma y un enter justo a la par de BX en este caso
+  char *start = line[0]
 
 
+strstr lo que retorna es un puntero a la posición donde se encuentra el "substring" que se le pasa como segundo parámetro
+si no lo encuentra, el puntero va a ser NULL, entonces en cada vez se pregunta si (!puntero)
 
+
+  
+
+  PONERLE COMENTARIOS A LOAD AFOCInstruction
+  PROGRAMAR MICROINSTRUCCIÓN DE IN OUT

@@ -11,6 +11,14 @@ cc -x c -c microinstructions.c && cc -x c -c CPU.c &&   cc -x c -c ALU.c &&  cc 
 int main (){
 	if (!initializeMemory()) printf ("Calloc for memory failed\n");
 
+	/*AFOCInstriction es una lista con toda la arquitectura (Instrucciones ASM)*/
+	struct AFOCInstruction *AFOC;
+
+	/*Leer un programa en ensamblador*/
+
+	/*Al ejecutar, hay que reemplazar X por arg1 y Y por arg2 (no dentro de AFOC,
+	si no una copia que es el que se va a ejecutar) */
+
 	loadAFOC();
 
 /*

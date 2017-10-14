@@ -2,7 +2,6 @@
 
 
 
-
 MicroInstruction string2StructMicroInstruction(char *line){
 	MicroInstruction microInstruction = {"","",""};
 	short counter = 0;

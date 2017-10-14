@@ -18,8 +18,8 @@ extern struct AFOCInstruction *AFOC;
 struct Instruction MBR;
 
 int initializeMemory();
-
-int loadAFOC();
+void loadASMProgramToMemory(char *filename);
+int loadAFOC(char *filename);
 
 struct flags {
 	/*La Carry Flag, la Sign Flag, la Zero Flag y la Interrupt Flag*/
@@ -29,8 +29,6 @@ struct flags {
 	short IF;
 
 };
-
-
 
 
 struct AFOCInstruction {

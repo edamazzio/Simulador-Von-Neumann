@@ -21,14 +21,45 @@ int initializeMemory(){
 	return 0;
 }
 
+
+//Aquí va la vara
+
+
+
+void loadASMProgramToMemory(char *filename){
+
+
+
+	char  row[255];
+  FILE  *fp;
+  fp = fopen( &filename, "r" );
+	int instructionCounter = 0;
+	char *space;
+	char *comma;
+	char *iterator;
+
+	while ( fgets( row, sizeof( row ), fp ) != NULL ) {
+		char iterator = row[0];
+		comma = strstr(row, ",");
+		int charcounter = 0;
+		while (iterator != comma){
+			memory[instructionCounter]
+		}
+	}
+
+
+	fclose( fp );
+}
+
+
 int loadAFOC() {
 
-    char  row[255];
-    FILE  *fp;
-    fp = fopen( "AFOC.txt", "r" );
+  char  row[255];
+  FILE  *fp;
+  fp = fopen( "AFOC.txt", "r" );
 
 
-    int contador = 1;
+  int contador = 1;
 	int cantInstruccionesASM = 0;
 	AFOC = calloc(1,sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction));
 
@@ -36,11 +67,9 @@ int loadAFOC() {
             printf("Calloc successful AFOC  \n");
         }
 
-
     if ( fp == NULL ) {
         // error handling..
     }
-
     while ( fgets( row, sizeof( row ), fp ) != NULL ) {
 
     struct AFOCInstruction instruction;
@@ -65,7 +94,6 @@ int loadAFOC() {
     		instruction.micros[contador] = micro;
     		contador++;
         printf("Attemting microinstructions realloc \n");
-        //printf("sizeof(realloc)%lu \n",cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction)));
     		AFOC = realloc(AFOC, cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction)));
         printf("microinstructions realloc done\n");
         break;
@@ -75,20 +103,10 @@ int loadAFOC() {
     	if (!ok){
     		break;
     	}
-
-
     }
-
-
     AFOC[0] = instruction;
-
-    /*
-    puts( row );
-    */
     }
-
     fclose( fp );
-
 
 		/*Si buff tiene #, -
 			creo el struct de AFOCInstruction -
@@ -103,6 +121,5 @@ int loadAFOC() {
 				else, detengo la vara
 			go to WHILEY
             */
-
     return 0;
     }
