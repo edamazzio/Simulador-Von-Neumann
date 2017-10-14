@@ -4,7 +4,7 @@
 
 
 /*Comando para compilar:
-cc -x c -c microinstructions.c && cc -x c -c CPU.c &&   cc -x c -c ALU.c &&  cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c &&  cc -o VonNeumann ALU.o CPU.o microinstructions.o Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o &&  ./VonNeumann
+cc -x c -c Instruction.c && cc -x c -c microinstructions.c && cc -x c -c CPU.c &&   cc -x c -c ALU.c &&  cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c &&  cc -o VonNeumann ALU.o CPU.o microinstructions.o Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o &&  ./VonNeumann
 */
 
 
@@ -19,7 +19,7 @@ int main (){
 	/*Al ejecutar, hay que reemplazar X por arg1 y Y por arg2 (no dentro de AFOC,
 	si no una copia que es el que se va a ejecutar) */
 
-	loadAFOC();
+	loadAFOC("AFOC.txt");
 
 /*
 	MicroInstruction a = scanMicroInstruction("B1<-11");

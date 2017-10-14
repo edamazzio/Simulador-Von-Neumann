@@ -9,23 +9,23 @@ buscar izqCOMA en registerNames
     memory[0].arg1 = posicion en registers
 
 derCOMA:
-buscar derCOMA en registerNames   (en registerNames también está [bl], [bx] y [bh]])
-  si no lo encuentra,
-    MAMO
-  si lo encuentra:
-    memory[0].arg1 = posicion en registers
-    done
-
-  si es un inmediato, lo pone en el cuarto dato
-
-  si es un [:
-    separar lo que está entre []
-    ver si es un int
-    si es un int
-      pone opcode 12 y pone en el 4to dato en la dirección entre []
+si es un inmediato, lo pone en el cuarto dato
+  FIN
+si no
+  buscar derCOMA en registerNames   (en registerNames también está [bl], [bx] y [bh]])
+    si no lo encuentra,
+      MAMO
+    si lo encuentra:
+      memory[0].arg1 = posicion en registers
       done
-    si no es un int
-        MAMO
+    si es un [:
+      separar lo que está entre []
+      ver si es un int
+      si es un int
+        pone opcode 12 y pone en el 4to dato en la dirección entre []
+        done
+      si no es un int
+          MAMO
 
   */
 
@@ -41,7 +41,7 @@ strstr lo que retorna es un puntero a la posición donde se encuentra el "substr
 si no lo encuentra, el puntero va a ser NULL, entonces en cada vez se pregunta si (!puntero)
 
 
-  
+
 
   PONERLE COMENTARIOS A LOAD AFOCInstruction
   PROGRAMAR MICROINSTRUCCIÓN DE IN OUT

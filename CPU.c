@@ -32,7 +32,7 @@ void loadASMProgramToMemory(char *filename){
 
 	char  row[255];
   FILE  *fp;
-  fp = fopen( &filename, "r" );
+  fp = fopen( filename, "r" );
 	int instructionCounter = 0;
 	char *space;
 	char *comma;
@@ -43,7 +43,7 @@ void loadASMProgramToMemory(char *filename){
 		comma = strstr(row, ",");
 		int charcounter = 0;
 		while (iterator != comma){
-			memory[instructionCounter]
+			//memory[instructionCounter]
 		}
 	}
 
