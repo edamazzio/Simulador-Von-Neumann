@@ -2,8 +2,9 @@
 
 
 
-struct MicroInstruction string2StructMicroInstruction(char *line){
-	struct MicroInstruction microInstruction = {"","",""};
+
+MicroInstruction string2StructMicroInstruction(char *line){
+	MicroInstruction microInstruction = {"","",""};
 	short counter = 0;
 	char *iterator = line;
 	char *separator;
@@ -11,16 +12,16 @@ struct MicroInstruction string2StructMicroInstruction(char *line){
 	/*Look for <*/
 	separator = strstr(line, "<");
 	if (separator){
-		microInstruction.operator[0] = separator[0];
-		microInstruction.operator[1] = separator[1];
-		microInstruction.operator[2] = '\0';
+		microInstruction.OP[0] = separator[0];
+		microInstruction.OP[1] = separator[1];
+		microInstruction.OP[2] = '\0';
 	} else {
 
 		/*If not <, find :*/
 		separator = strstr(line, ":");
 		if (separator){
-			microInstruction.operator[0] = separator[0];
-			microInstruction.operator[2] = '\0';
+			microInstruction.OP[0] = separator[0];
+			microInstruction.OP[2] = '\0';
 		} else {
 
 			/*If also not :, might be In or out*/
@@ -33,7 +34,7 @@ struct MicroInstruction string2StructMicroInstruction(char *line){
 		}
 	}
 
-	/*obtains the left operator*/
+	/*obtains the left OP*/
 	while (iterator != separator) {
 		if (*iterator == ' ') {
 			iterator++;
@@ -47,13 +48,13 @@ struct MicroInstruction string2StructMicroInstruction(char *line){
 
 	counter = 0;
 
-	/*If the operator is <-, the iterator must be incremented to point to the next letter*/
-	if (microInstruction.operator[0]== '<') iterator++;
+	/*If the OP is <-, the iterator must be incremented to point to the next letter*/
+	if (microInstruction.OP[0]== '<') iterator++;
 	iterator++;
 
-	if (microInstruction.operator[0] == '\0') return microInstruction;
+	if (microInstruction.OP[0] == '\0') return microInstruction;
 
-	/*obtains the right operator*/
+	/*obtains the right OP*/
 	while (*iterator != '\0') {
 		if (*iterator == ' ') {
 			iterator++;
@@ -66,17 +67,17 @@ struct MicroInstruction string2StructMicroInstruction(char *line){
 
 
 
-void parseMicroInstruction (struct MicroInstruction microInstruction){
+void parseMicroInstruction (MicroInstruction microInstruction){
 
 	char *separator;
 	char *registerX = calloc(3, sizeof(char));
 	char *registerY = calloc(3, sizeof(char));
 
-	separator = strstr(microInstruction.operator, "<");
+	separator = strstr(microInstruction.OP, "<");
 	if (separator) {
 		parseMicroMov(microInstruction);
 	}else {
-		separator = strstr(microInstruction.operator, ":");
+		separator = strstr(microInstruction.OP, ":");
 		if (separator){
 			 if(!strcmp(microInstruction.leftOP, "ALU")){
 				 /*printf("ALU found\n");*/
@@ -85,7 +86,7 @@ void parseMicroInstruction (struct MicroInstruction microInstruction){
 				 parseMicroMEM(microInstruction);
 			 }else if (!strcmp(microInstruction.leftOP, "TEST")){
 				 /**/
-			 }else printf("Microinstruction %s not recognized in %s%s%s\n", microInstruction.leftOP, microInstruction.leftOP, microInstruction.operator, microInstruction.rightOP);
+			 }else printf("Microinstruction %s not recognized in %s%s%s\n", microInstruction.leftOP, microInstruction.leftOP, microInstruction.OP, microInstruction.rightOP);
 
 		}
 		else{
@@ -103,7 +104,7 @@ void parseMicroInstruction (struct MicroInstruction microInstruction){
 }
 
 
-void parseMicroMov(struct MicroInstruction microInstruction){
+void parseMicroMov(MicroInstruction microInstruction){
 
 	/*Check if operands are memory addresses*/
 	if (microInstruction.leftOP[0]=='[' ){
@@ -169,7 +170,7 @@ void parseMicroMov(struct MicroInstruction microInstruction){
 	}
 }
 
-void parseMicroALU(struct MicroInstruction microInstruction){
+void parseMicroALU(MicroInstruction microInstruction){
 
 	int i = 0;
 	int size = registerNamesLength;
@@ -252,7 +253,7 @@ void parseMicroALU(struct MicroInstruction microInstruction){
 
 
 
-void parseMicroMEM(struct MicroInstruction microInstruction){
+void parseMicroMEM(MicroInstruction microInstruction){
 
 	int i = 0;
 	int size = registerNamesLength;
@@ -275,6 +276,3 @@ void parseMicroMEM(struct MicroInstruction microInstruction){
 	}
 
 }
-
-
-

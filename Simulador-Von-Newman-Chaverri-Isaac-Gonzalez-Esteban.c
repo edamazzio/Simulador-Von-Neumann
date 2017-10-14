@@ -4,7 +4,7 @@
 
 
 /*Comando para compilar:
- cc -x c -c ALU.c &&  cc -x c -c CPU.c &&  cc -x c -c microinstructions.c &&  cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c &&  cc -o VonNeumann ALU.o CPU.o microinstructions.o Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o &&  ./VonNeumann
+cc -x c -c microinstructions.c && cc -x c -c CPU.c &&   cc -x c -c ALU.c &&  cc -x c -c Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.c &&  cc -o VonNeumann ALU.o CPU.o microinstructions.o Simulador-Von-Newman-Chaverri-Isaac-Gonzalez-Esteban.o &&  ./VonNeumann
 */
 
 
@@ -14,13 +14,13 @@ int main (){
 	loadAFOC();
 
 /*
-	struct MicroInstruction a = scanMicroInstruction("B1<-11");
+	MicroInstruction a = scanMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
 
-	struct MicroInstruction b = scanMicroInstruction("B2<-5");
+	MicroInstruction b = scanMicroInstruction("B2<-5");
 	parseMicroInstruction(b);
 
-	struct MicroInstruction c = scanMicroInstruction("ALU:add");
+	MicroInstruction c = scanMicroInstruction("ALU:add");
 	parseMicroALU(c);*/
 
 

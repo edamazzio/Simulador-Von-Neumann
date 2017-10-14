@@ -30,7 +30,7 @@ int loadAFOC() {
 
     int contador = 1;
 	int cantInstruccionesASM = 0;
-	AFOC = calloc(1,sizeof(struct AFOCInstruction) + contador * sizeof(struct MicroInstruction));
+	AFOC = calloc(1,sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction));
 
     if (AFOC){
             printf("Calloc successful AFOC  \n");
@@ -47,16 +47,8 @@ int loadAFOC() {
 
     if (row[0] == '#'){
     	cantInstruccionesASM++;
-        printf("%d \n\n\n",contador);
-    	instruction.microInstructions = calloc(contador, sizeof(struct MicroInstruction));
-        if (instruction.microInstructions){
-            printf("Calloc successful MicroInstruction  \n");
-        }
-        else{
-            break;
-        }
     	fgets( row, sizeof( row ), fp );
-    	if (!row){
+    	if (!row[0]){
     		printf("Instruction incomplete \n");
     		break;
     	}
@@ -64,19 +56,19 @@ int loadAFOC() {
     	fgets( row, sizeof( row ), fp );
     	int ok = 1;
     	while(row[0] != '$'){
-    		struct MicroInstruction micro;
+    		MicroInstruction micro;
     		micro = string2StructMicroInstruction(row);
-    		if (!micro.leftOP) {
+    		if (!micro.leftOP[0]) {
     			ok = 0;
     			break;
     		}
-    		instruction.microInstructions[contador] = micro;
+    		instruction.micros[contador] = micro;
     		contador++;
-            printf("Attemting microinstructions realloc \n");
-            //printf("sizeof(realloc)%lu \n",cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(struct MicroInstruction)));
-    		AFOC = realloc(AFOC, cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(struct MicroInstruction)));
-            printf("microinstructions realloc done\n");
-            break;
+        printf("Attemting microinstructions realloc \n");
+        //printf("sizeof(realloc)%lu \n",cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction)));
+    		AFOC = realloc(AFOC, cantInstruccionesASM * (sizeof(struct AFOCInstruction) + contador * sizeof(MicroInstruction)));
+        printf("microinstructions realloc done\n");
+        break;
 
     	ok = 1;
     	}
@@ -90,7 +82,7 @@ int loadAFOC() {
     	printf("Error \n");
     	return -1;
     }
-    
+
     AFOC[0] = instruction;
 
     /*
