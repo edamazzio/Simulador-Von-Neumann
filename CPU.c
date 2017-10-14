@@ -78,10 +78,7 @@ int loadAFOC() {
 
 
     }
-    else{
-    	printf("Error \n");
-    	return -1;
-    }
+
 
     AFOC[0] = instruction;
 
