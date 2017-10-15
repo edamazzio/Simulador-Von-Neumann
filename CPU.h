@@ -1,9 +1,10 @@
 #include "microinstructions.h"
+#include "Instruction.h"
 #ifndef CPUH
 #define CPUH
 
 
-#include "Instruction.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -13,6 +14,7 @@
 extern char *registerNames[];
 extern int registers[];
 extern int registerNamesLength;
+extern int cantInstruccionesASM;
 extern struct Instruction *memory;
 extern struct AFOCInstruction *AFOC;
 struct Instruction MBR;

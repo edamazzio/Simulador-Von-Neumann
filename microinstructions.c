@@ -61,6 +61,9 @@ MicroInstruction string2StructMicroInstruction(char *line){
 		}
 		microInstruction.rightOP[counter++] = *iterator++;
 	}
+
+	
+
 	return microInstruction;
 }
 

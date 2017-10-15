@@ -1,11 +1,11 @@
 #include "Instruction.h"
 
-Instruction codificar(char *line){
+Instruction codificarASM(char *line){
 
   struct StringInstruction{
     char mnem[5];
     char arg1[5];
-    char arg2[5];
+    char arg2[7];
   };
 
   Instruction instruction = {-1,-1,-1,-1,0};
@@ -18,6 +18,8 @@ Instruction codificar(char *line){
   char *comma = strstr(line, ",");
   char *space = strstr (line, " ");
   char *start = line;
+  char *end = line;
+  while (*end)end++;
 
   if (!comma || !space){
     printf("Invalid instruction \"%s\"\n", line);
@@ -28,7 +30,7 @@ Instruction codificar(char *line){
   /*Pone el mnemonico en el struct temporal*/
   while (start != space) stringInstruction.mnem[counter++]= *start++;
   /*Finaliza el string*/
-  stringInstruction.mnem[counter] = '\0';
+  stringInstruction.mnem[--counter] = '\0';
   counter = 0;
 
   /*Pone lo que está a la izquierda de la coma en el struct temporal arg1*/
@@ -37,19 +39,22 @@ Instruction codificar(char *line){
   stringInstruction.arg1[counter] = '\0';
   comma++;
   counter = 0;
+
   /*Pone lo que está a la derecha de la coma en el struct temporal arg2*/
-  while (comma[counter]!='\0') stringInstruction.arg2[counter++] = *comma++;
+  while (comma != end) stringInstruction.arg2[counter++] = *comma++;
   stringInstruction.arg2[counter++] = '\0';
 
 
-  struct AFOCInstruction *AFOC;
-  int size = sizeof(AFOC)/sizeof(AFOC[0]);
+  int size = cantInstruccionesASM;
+  printf("\n\nValue of size is %d\n\n", size);
 
   /*Revisa en la lista AFOC si el mnemonico existe*/
   int i =0;
   for (i = 0; i < size;i++){
     if (!strcmp(stringInstruction.mnem, AFOC[i].mnemonic)){
+      printf("Instruction %s FOUND!!! in AFOC with code %d\n", stringInstruction.mnem,i);
       instruction.instruction = i;
+      break;
     }
   }
   if (instruction.instruction == -1){
@@ -63,6 +68,7 @@ Instruction codificar(char *line){
   for (i = 0; i < size; i++){
     if (!strcmp(stringInstruction.arg1, registerNames[i])){
       instruction.arg1 = i;
+      break;
     }
   }
   if (instruction.arg1 == -1){
@@ -91,8 +97,10 @@ Instruction codificar(char *line){
     size = registerNamesLength;
     i = 0;
     for (i = 0; i < size; i++){
+      printf("Comparing arg2 %s with %s\n", stringInstruction.arg2, registerNames[i]);
       if (!strcmp(stringInstruction.arg2, registerNames[i])){
         instruction.arg2 = i;
+        break;
       }
     }
   }
@@ -114,7 +122,7 @@ Instruction codificar(char *line){
           instruction.cuartoDato = strtol(betweenBrackets,0,10);
           instruction.arg2 = 12; /*Ver tabla de datos en especificación*/
         }else{
-          printf ("Can't access memory from specified direction [%s]\n", stringInstruction.arg2);
+          printf ("Can't access memory from specified direction [%s]\n", betweenBrackets);
           return defaultInstruction;
         }
       }
@@ -126,27 +134,47 @@ Instruction codificar(char *line){
     }
     /*Si no es []*/
     else{
-      printf ("Arg2 \"%s\" is not valid\n", stringInstruction.arg1);
+      printf ("Arg2 \"%s\" is not valid\n", stringInstruction.arg2);
       return defaultInstruction;
     }
   }
 
   /*If this line is reached, instruction is correct*/
   instruction.isInstruction = 1;
-  printf("El valor de instruction.mnem es %d\n", instruction.instruction);
-  printf("El valor de instruction.arg1 es %d\n", instruction.arg1);
-  printf("El valor de instruction.arg2 es %d\n", instruction.arg2);
-  printf("El valor de instruction.cuartoDato es %d\n", instruction.cuartoDato);
-  printf("El valor de instruction.isInstruction es %d\n", instruction.isInstruction);
-
-
   return instruction;
 
+}
 
 
-  /*
-  printf ("Arg1 \"%s\" not defined in AFOC\n", stringInstruction.arg1);
-  return;*/
+/*Decodificary  ejecutar*/
+void decodeAndExec(Instruction instruction){
 
+  int OPCode = instruction.instruction;
+  struct AFOCInstruction ins;
+  int sizeOfMicros = sizeof(ins.micros)/sizeof(ins.micros[0]);
+
+
+  strcpy(ins.mnemonic, AFOC[OPCode].mnemonic);
+  memcpy(&ins.micros, &AFOC[OPCode].micros, sizeof(ins.micros));
+  printf("ins.micros[0].leftOP = %s\n", ins.micros[0].leftOP);
+
+  for (i = 0; i < sizeOfMicros; i ++){
+    if (!strcmp(ins.micros[i].leftOP, "X")){
+      strcpy(ins.micros[i].leftOP, decodeArg(instruction.arg1));
+    }
+    if (!strcmp(ins.micros[i].rightOP, "X")){
+      strcpy(ins.micros[i].rightOP, decodeArg(instruction.arg2));
+    }
+    if (!strcmp(ins.micros[i].leftOP, "Y")){
+      strcpy(ins.micros[i].leftOP, decodeArg(instruction.arg1));
+    }
+    if (!strcmp(ins.micros[i].rightOP, "Y")){
+      strcpy(ins.micros[i].rightOP, decodeArg(instruction.arg2));
+    }
+  }
+}
+
+
+void decodeArg(int arg){
 
 }
