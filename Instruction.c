@@ -152,8 +152,12 @@ Instruction codificarASM(char *line){
 }
 
 
-/*Decodificary  ejecutar*//*
+/*Decodificary  ejecutar*/
+
+/*
 void decodeAndExec(Instruction instruction){
+
+  printf ("Attempting decodification of instruction opcode = %d, arg1 = %d,  arg2 = %d, cuartoDato = %d\n");
 
   int OPCode = instruction.instruction;
   struct AFOCInstruction ins;
@@ -166,21 +170,61 @@ void decodeAndExec(Instruction instruction){
   int i = 0;
   for (i = 0; i < sizeOfMicros; i ++){
     if (!strcmp(ins.micros[i].leftOP, "X")){
+      printf("Found X in microinstruction, replacing with correct argument");
       strcpy(ins.micros[i].leftOP, decodeArg(instruction, 1));
+      printf("Argument replaced. Argument is now %s", ins.micros[i].leftOP);
     }
     if (!strcmp(ins.micros[i].rightOP, "X")){
+      printf("Found X in microinstruction, replacing with correct argument");
       strcpy(ins.micros[i].rightOP, decodeArg(instruction, 2));
+      printf("Argument replaced. Argument is now %s", ins.micros[i].rightOP);
     }
     if (!strcmp(ins.micros[i].leftOP, "Y")){
+      printf("Found X in microinstruction, replacing with correct argument");
       strcpy(ins.micros[i].leftOP, decodeArg(instruction, 1));
+      printf("Argument replaced. Argument is now %s", ins.micros[i].leftOP);
     }
     if (!strcmp(ins.micros[i].rightOP, "Y")){
+      printf("Found X in microinstruction, replacing with correct argument");
       strcpy(ins.micros[i].rightOP, decodeArg(instruction, 2));
+      printf("Argument replaced. Argument is now %s", ins.micros[i].rightOP);
     }
   }
 }
 
+*/
 
-void decodeArg(int arg){
+/*
+void decodeArg(Instruction instruction, int arg){
 
-}*/
+  char * value = calloc (6, sizeof(char));
+  size = registerNamesLength;
+
+
+  if (arg == 1){
+    if (instruction.arg1 == -1){
+      printf("Unknown leftOP -1\n");
+      return "";
+    }else{
+      if (instruction.arg1 <= size){
+        printf ("Arg1 is %s\n",registerNames[instruction.arg1]);
+        return registerNames[instruction.arg1];
+      }else{
+        printf("Unknown arg1 %d\n", instruction.arg1);
+      }
+    }
+  }
+}
+
+  else{
+    if (instruction.arg2 == 12){
+      char* temp = value+1;
+      value[0] = '[';
+      sprintf(temp, "%d", instruction.cuartoDato);
+      printf("")
+
+    }
+
+  }
+}
+*/

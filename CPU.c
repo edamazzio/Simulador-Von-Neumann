@@ -56,7 +56,7 @@ int loadAFOC(char* filename) {
   fp = fopen( filename, "r" );
 	if (!fp){
 		printf ("Error loading file %s\n", filename);
-		break;
+		return -1;
 	}else{
 		printf ("Loaded file %s succesfully\n", filename);
 	}

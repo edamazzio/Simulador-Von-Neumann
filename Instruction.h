@@ -18,6 +18,6 @@ typedef struct Instruction {
 
 Instruction codificarASM(char *line);/*
 void decodeAndExec(Instruction instruction);
-void decodeArg(int arg);*/
+void decodeArg(Instruction instruction, int arg);*/
 
 #endif

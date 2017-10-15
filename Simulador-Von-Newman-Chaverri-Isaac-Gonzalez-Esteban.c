@@ -51,16 +51,25 @@ int main ( int argc, char *argv[] ){
 	}
 
 
-	return 0;
 
-/*
-	MicroInstruction a = scanMicroInstruction("B1<-11");
+	printf("Here ends what has been done of the progam. \nThe following are parsings of microinstructions to prove that the parser works");
+
+	printf("Running command MicroInstruction a = string2StructMicroInstruction(\"B1<-11\");\n Parsing a");
+	MicroInstruction a = string2StructMicroInstruction("B1<-11");
 	parseMicroInstruction(a);
 
-	MicroInstruction b = scanMicroInstruction("B2<-5");
+	printf("Running command MicroInstruction b = string2StructMicroInstruction(\"B2<-5\");\n Parsing b");
+	MicroInstruction b = string2StructMicroInstruction("B2<-5");
 	parseMicroInstruction(b);
 
-	MicroInstruction c = scanMicroInstruction("ALU:add");
-	parseMicroALU(c);*/
+	printf("Running command MicroInstruction c = string2StructMicroInstruction(\"ALU:add\");\n Parsing c");
+	MicroInstruction c = string2StructMicroInstruction("ALU:add");
+	parseMicroALU(c);
+
+
+
+
+
+	return 0;
 
 }
