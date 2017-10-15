@@ -50,10 +50,16 @@ void loadASMProgramToMemory(char *filename){
 }
 
 
-int loadAFOC() {
+int loadAFOC(char* filename) {
 	char  row[255];
   FILE  *fp;
-  fp = fopen( "AFOC.txt", "r" );
+  fp = fopen( filename, "r" );
+	if (!fp){
+		printf ("Error loading file %s\n", filename);
+		break;
+	}else{
+		printf ("Loaded file %s succesfully\n", filename);
+	}
 
   int contador = 1;
 	cantInstruccionesASM = 0;
