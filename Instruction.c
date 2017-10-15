@@ -44,15 +44,16 @@ Instruction codificarASM(char *line){
   while (comma != end) stringInstruction.arg2[counter++] = *comma++;
   stringInstruction.arg2[counter++] = '\0';
 
+  printf("Instruction %s has been separated as mnemonic = \"%s\", arg1 = \"%s\", arg2 = \"%s\"\n", line, stringInstruction.mnem, stringInstruction.arg1, stringInstruction.arg2);
 
   int size = cantInstruccionesASM;
-  printf("\n\nValue of size is %d\n\n", size);
+
 
   /*Revisa en la lista AFOC si el mnemonico existe*/
   int i =0;
   for (i = 0; i < size;i++){
     if (!strcmp(stringInstruction.mnem, AFOC[i].mnemonic)){
-      printf("Instruction %s FOUND!!! in AFOC with code %d\n", stringInstruction.mnem,i);
+      printf("Instruction %s is defined in AFOC with code %d\n", stringInstruction.mnem,i);
       instruction.instruction = i;
       break;
     }
@@ -63,11 +64,13 @@ Instruction codificarASM(char *line){
   }
 
   /*Buscar arg1 in registerNames*/
+  printf ("Looking for arg1 \"%s\" in registers...\n", stringInstruction.arg1);
   size = registerNamesLength;
   i = 0;
   for (i = 0; i < size; i++){
     if (!strcmp(stringInstruction.arg1, registerNames[i])){
       instruction.arg1 = i;
+      printf("\"%s\" found in registers with code %d\n",stringInstruction.arg1, i );
       break;
     }
   }
@@ -78,11 +81,10 @@ Instruction codificarASM(char *line){
 
 
   /*Validar arg2*/
-
+  printf("Validating arg2 \"%s\"\n", stringInstruction.arg2);
   /*Si es un número*/
   if (isdigit(stringInstruction.arg2[0])){
-
-    printf("It is an inmediate\n");
+    printf("Arg 2 \"%s\" is an inmediate\nNumber will be assigned to 4th data\n", stringInstruction.arg2);
 
     /*Convertir inmediato a numero y ponerlo en el cuarto dato*/
     instruction.cuartoDato = strtol(stringInstruction.arg2,0,10);
@@ -90,6 +92,9 @@ Instruction codificarASM(char *line){
     /*Poner este valor ahorita, determina si se encontró un arg2 más adelante cuando
     se pregunte si arg2 es -1 y cuartoDato fue asignado, lo cual sería correcto*/
     instruction.isInstruction = 1;
+
+    printf("Done coding instruction %s\n", line);
+    return instruction;
   }
   /*Si no es un número*/
   else{
@@ -100,6 +105,7 @@ Instruction codificarASM(char *line){
       printf("Comparing arg2 %s with %s\n", stringInstruction.arg2, registerNames[i]);
       if (!strcmp(stringInstruction.arg2, registerNames[i])){
         instruction.arg2 = i;
+        printf("\"%s\" found in registers with code %d\n",stringInstruction.arg2, i );
         break;
       }
     }
@@ -146,7 +152,7 @@ Instruction codificarASM(char *line){
 }
 
 
-/*Decodificary  ejecutar*/
+/*Decodificary  ejecutar*//*
 void decodeAndExec(Instruction instruction){
 
   int OPCode = instruction.instruction;
@@ -157,19 +163,19 @@ void decodeAndExec(Instruction instruction){
   strcpy(ins.mnemonic, AFOC[OPCode].mnemonic);
   memcpy(&ins.micros, &AFOC[OPCode].micros, sizeof(ins.micros));
   printf("ins.micros[0].leftOP = %s\n", ins.micros[0].leftOP);
-
+  int i = 0;
   for (i = 0; i < sizeOfMicros; i ++){
     if (!strcmp(ins.micros[i].leftOP, "X")){
-      strcpy(ins.micros[i].leftOP, decodeArg(instruction.arg1));
+      strcpy(ins.micros[i].leftOP, decodeArg(instruction, 1));
     }
     if (!strcmp(ins.micros[i].rightOP, "X")){
-      strcpy(ins.micros[i].rightOP, decodeArg(instruction.arg2));
+      strcpy(ins.micros[i].rightOP, decodeArg(instruction, 2));
     }
     if (!strcmp(ins.micros[i].leftOP, "Y")){
-      strcpy(ins.micros[i].leftOP, decodeArg(instruction.arg1));
+      strcpy(ins.micros[i].leftOP, decodeArg(instruction, 1));
     }
     if (!strcmp(ins.micros[i].rightOP, "Y")){
-      strcpy(ins.micros[i].rightOP, decodeArg(instruction.arg2));
+      strcpy(ins.micros[i].rightOP, decodeArg(instruction, 2));
     }
   }
 }
@@ -177,4 +183,4 @@ void decodeAndExec(Instruction instruction){
 
 void decodeArg(int arg){
 
-}
+}*/

@@ -28,18 +28,23 @@ void loadASMProgramToMemory(char *filename){
 	char  row[255];
   FILE  *fp;
   fp = fopen( filename, "r" );
+	if (!fp){
+		printf("Error reading from file %s\n", filename);
+	}printf ("ASM file %s opened succesfully\n", filename);
 	int instructionCounter = 0;
 
 	while ( fgets( row, sizeof( row ), fp ) != NULL ) {
 		if(row[(strlen(row)-1)]=='\n') row[(strlen(row)-1)] = '\0';
-		printf("Attemping codification of \"%s\" \n",row);
+		printf("Attemping codification of line\"%s\" \n",row);
 		Instruction instruction;
 		instruction = codificarASM(row);
-		printf("El valor de instruction.mnem es %d\n", instruction.instruction);
-	  printf("El valor de instruction.arg1 es %d\n", instruction.arg1);
-	  printf("El valor de instruction.arg2 es %d\n", instruction.arg2);
-	  printf("El valor de instruction.cuartoDato es %d\n", instruction.cuartoDato);
-	  printf("El valor de instruction.isInstruction es %d\n", instruction.isInstruction);
+
+		printf("\nSummary of codification:\n");
+		printf("Value of instruction.mnem is %d\n", instruction.instruction);
+	  printf("Value of instruction.arg1 is %d\n", instruction.arg1);
+	  printf("Value of instruction.arg2 is %d\n", instruction.arg2);
+	  printf("Value of instruction.cuartoDato is %d\n", instruction.cuartoDato);
+	  printf("Value of instruction.isInstruction is %d\n\n\n", instruction.isInstruction);
 	}
 	fclose( fp );
 }
@@ -57,17 +62,19 @@ int loadAFOC() {
 
     if (AFOC){
             printf("Calloc successful AFOC  \n");
-        }
+        }else{
+					printf ("AFOC allocated correctly\n");
+				}
 
     if ( fp == NULL ) {
         // error handling..
     }
     while ( fgets( row, sizeof( row ), fp ) != NULL ) {
 			if(row[(strlen(row)-1)]=='\n') row[(strlen(row)-1)] = '\0';
-			/*printf("row is \"%s\"\n", row);*/
 			struct AFOCInstruction instruction;
 
 	    if (row[0] == '#'){
+				printf("# Found. Attempting to store microinstruction\n");
 	    	cantInstruccionesASM++;
 	    	fgets( row, sizeof( row ), fp );
 				if(row[(strlen(row)-1)]=='\n') row[(strlen(row)-1)] = '\0';
@@ -76,6 +83,7 @@ int loadAFOC() {
 	    		break;
 					return -1;
 	    	}
+				printf("MicroInstruction will have mnemonic %s\n", row);
 	    	strcpy(instruction.mnemonic,row);
 	    	fgets( row, sizeof( row ), fp );
 				if(row[(strlen(row)-1)]=='\n') row[(strlen(row)-1)] = '\0';
@@ -83,32 +91,35 @@ int loadAFOC() {
 	    	while(row[0] != '$'){
 	    		MicroInstruction micro;
 	    		micro = string2StructMicroInstruction(row);
-
+					printf ("MicroInstruction stored. leftOP = %s, op = %s, rightOP = %s\n", micro.leftOP, micro.OP, micro.rightOP);
 	    		if (!micro.leftOP[0]) {
 	    			ok = 0;
 	    			break;
+						return -1;
 	    		}
-	    		instruction.micros[contador-1] = micro;
 
+	    		instruction.micros[contador-1] = micro;
 	    		contador++;
-	        printf("Attemting microinstructions realloc \n");
 					sizeOfAFOC *= cantInstruccionesASM;
 	    		AFOC = realloc(AFOC, sizeOfAFOC);
-	        printf("microinstructions realloc done\n");
-	        break;
+					fgets( row, sizeof( row ), fp );
+					if(row[(strlen(row)-1)]=='\n') row[(strlen(row)-1)] = '\0';
 
 	    	ok = 1;
 	    	}
+				printf("End of microinstructions found\n");
 	    	if (!ok){
 	    		break;
 					return -1;
 	    	}
 				strcpy(AFOC[cantInstruccionesASM-1].mnemonic, instruction.mnemonic);
 				memcpy(&AFOC[cantInstruccionesASM-1].micros, &instruction.micros, sizeof(instruction.micros));
+				printf("Instruction %s has been stored into AFOC\n", instruction.mnemonic);
 
 	    }
 
     }
     fclose( fp );
+		printf("Done storing AFOC\n\n");
     return 0;
     }
