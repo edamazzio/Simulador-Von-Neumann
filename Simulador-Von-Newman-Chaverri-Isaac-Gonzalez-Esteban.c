@@ -66,7 +66,14 @@ int main ( int argc, char *argv[] ){
 	MicroInstruction c = string2StructMicroInstruction("ALU:add");
 	parseMicroALU(c);
 
+	printf("Running command c = string2StructMicroInstruction(\"ALU:mul\");\n Parsing c");
+	c = string2StructMicroInstruction("ALU:mul");
+	parseMicroALU(c);
 
+	int i = 0;
+	for (i = 0; i < registerNamesLength; i++){
+		printf("Value of %s is %d\n", registerNames[i], registers[i]);
+	}
 
 
 
